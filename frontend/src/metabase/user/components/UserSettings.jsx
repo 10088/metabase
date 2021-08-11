@@ -69,7 +69,7 @@ export default class UserSettings extends Component {
             onChange={tab => setTab(tab)}
           />
         </Flex>
-        <Box w={["100%", 540]} ml="auto" mr="auto" px={[1, 2]} py={[1, 3]}>
+        <Box width={["100%", 540]} ml="auto" mr="auto" px={[1, 2]} py={[1, 3]}>
           {tab === "details" ? (
             <User.Form
               {...this.props}
