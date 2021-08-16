@@ -8,11 +8,6 @@ import { memoize, createLookupByProperty } from "metabase-lib/lib/utils";
 
 import { generateSchemaId } from "metabase/schema";
 
-import type { SchemaName } from "metabase-types/types/Table";
-import type { DatabaseFeature } from "metabase-types/types/Database";
-
-type VirtualDatabaseFeature = "join";
-
 /**
  * Wrapper class for database metadata objects. Contains {@link Schema}s, {@link Table}s, {@link Metric}s, {@link Segment}s.
  *
@@ -27,7 +22,10 @@ export default class Database extends Base {
 
   // SCHEMAS
 
-  schema(schemaName: ?SchemaName) {
+  /**
+   * @param {import("./metadata").SchemaName} [schemaName]
+   */
+  schema(schemaName) {
     return this.metadata.schema(generateSchemaId(this.id, schemaName));
   }
 
@@ -49,7 +47,12 @@ export default class Database extends Base {
 
   // FEATURES
 
-  hasFeature(feature: null | DatabaseFeature | VirtualDatabaseFeature) {
+  /**
+   * @typedef {import("./metadata").DatabaseFeature} DatabaseFeature
+   * @typedef {"join"} VirtualDatabaseFeature
+   * @param {DatabaseFeature | VirtualDatabaseFeature} [feature]
+   */
+  hasFeature(feature) {
     if (!feature) {
       return true;
     }
