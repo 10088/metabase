@@ -16,7 +16,7 @@ import { generateSchemaId } from "metabase/schema";
 export default class Database extends Base {
   // TODO Atte Keinänen 6/11/17: List all fields here (currently only in types/Database)
 
-  displayName(): string {
+  displayName() {
     return this.name;
   }
 
@@ -29,7 +29,7 @@ export default class Database extends Base {
     return this.metadata.schema(generateSchemaId(this.id, schemaName));
   }
 
-  schemaNames(): SchemaName[] {
+  schemaNames() {
     return this.schemas.map(s => s.name).sort((a, b) => a.localeCompare(b));
   }
 
@@ -75,13 +75,13 @@ export default class Database extends Base {
 
   // QUESTIONS
 
-  newQuestion(): Question {
+  newQuestion() {
     return this.question()
       .setDefaultQuery()
       .setDefaultDisplay();
   }
 
-  question(query = { "source-table": null }): Question {
+  question(query = { "source-table": null }) {
     return Question.create({
       metadata: this.metadata,
       dataset_query: {
@@ -92,7 +92,7 @@ export default class Database extends Base {
     });
   }
 
-  nativeQuestion(native = {}): Question {
+  nativeQuestion(native = {}) {
     return Question.create({
       metadata: this.metadata,
       dataset_query: {
@@ -112,7 +112,7 @@ export default class Database extends Base {
   }
 
   /** Returns a database containing only the saved questions from the same database, if any */
-  savedQuestionsDatabase(): ?Database {
+  savedQuestionsDatabase() {
     return this.metadata.databasesList().find(db => db.is_saved_questions);
   }
 
